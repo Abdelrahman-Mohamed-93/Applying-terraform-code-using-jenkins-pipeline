@@ -17,8 +17,6 @@ pipeline {
         stage('Preparing all environments') {
             steps {
                 echo "Preparing all environments"
-                echo "$ACCESSKEY"
-                echo "$SECRETKEY"
                 sh ('terraform init')
                 sh ('terraform workspace new dev')
                 sh ('terraform workspace new prod')
