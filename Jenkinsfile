@@ -14,7 +14,6 @@ pipeline {
             }
         }
  
-    stages {
         stage('Preparing all environments') {
             steps {
                 echo "Preparing all environments"
@@ -51,5 +50,4 @@ pipeline {
         }
         
     }
-}
 }
