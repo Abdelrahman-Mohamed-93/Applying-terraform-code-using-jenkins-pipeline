@@ -8,8 +8,8 @@ pipeline {
             steps {
                 echo "Exporting aws credentials"
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'ACCESSKEY', passwordVariable: 'SECRETKEY')]) {
-                sh "export AWS_ACCESS_KEY_ID=$ACCESSKEY"
-                sh "export AWS_SECRET_ACCESS_KEY=$SECRETKEY"
+                    sh "export AWS_ACCESS_KEY_ID=$ACCESSKEY"
+                    sh "export AWS_SECRET_ACCESS_KEY=$SECRETKEY"
                 }
             }
         }
