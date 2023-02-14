@@ -19,9 +19,9 @@ pipeline {
                 echo "Preparing all environments"
                 withAWS(credentials: 'aws-credential', region: 'us-east-1') {
                     sh ('terraform init')
+                    sh ('terraform workspace new dev')
+                    sh ('terraform workspace new prod')
                 }
-                sh ('terraform workspace new dev')
-                sh ('terraform workspace new prod')
             }
         }
 
