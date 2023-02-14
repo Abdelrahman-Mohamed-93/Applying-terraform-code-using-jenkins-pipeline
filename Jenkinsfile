@@ -18,7 +18,7 @@ pipeline {
         stage('Deploying in dev environment') {
             when {
                 expression{
-                    params.Environment == 'pev'
+                    params.Environment == 'dev'
                 }
             }
             steps {
@@ -33,7 +33,7 @@ pipeline {
         stage('Deploying in prod environment') {
             when {
                 expression{
-                    params.Environment == 'drod'
+                    params.Environment == 'prod'
                 }
             }
             steps {
