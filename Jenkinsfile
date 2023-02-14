@@ -18,6 +18,8 @@ pipeline {
             steps {
                 echo "Preparing all environments"
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'ACCESSKEY', passwordVariable: 'SECRETKEY')]) {
+                    sh "export AWS_ACCESS_KEY_ID=$ACCESSKEY"
+                    sh "export AWS_SECRET_ACCESS_KEY=$SECRETKEY"
                     sh ('terraform init')
                 }
                 sh ('terraform workspace new dev')
