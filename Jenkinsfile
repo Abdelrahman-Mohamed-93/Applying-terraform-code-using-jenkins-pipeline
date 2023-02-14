@@ -28,7 +28,7 @@ pipeline {
         stage('Deploying in dev environment') {
             when {
                 expression{
-                    params.project == 'dev'
+                    params.Environment == 'dev'
                 }
             }
             steps {
@@ -41,7 +41,7 @@ pipeline {
         stage('Deploying in prod environment') {
             when {
                 expression{
-                    params.project == 'prod'
+                    params.Environment == 'prod'
                 }
             }
             steps {
