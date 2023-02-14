@@ -4,16 +4,6 @@ pipeline {
         choice(name: 'Environment', choices:['dev','prod'])
     }
     stages {
-        // stage('Exporting aws credentials') {
-        //     steps {
-        //         echo "Exporting aws credentials"
-        //         withCredentials([usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'ACCESSKEY', passwordVariable: 'SECRETKEY')]) {
-        //             sh "export AWS_ACCESS_KEY_ID=$ACCESSKEY"
-        //             sh "export AWS_SECRET_ACCESS_KEY=$SECRETKEY"
-        //         }
-        //     }
-        // }
- 
         stage('Preparing all environments') {
             steps {
                 echo "Preparing all environments"
@@ -28,7 +18,7 @@ pipeline {
         stage('Deploying in dev environment') {
             when {
                 expression{
-                    params.Environment == 'dev'
+                    params.Environment == 'pev'
                 }
             }
             steps {
@@ -43,7 +33,7 @@ pipeline {
         stage('Deploying in prod environment') {
             when {
                 expression{
-                    params.Environment == 'prod'
+                    params.Environment == 'drod'
                 }
             }
             steps {
