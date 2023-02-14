@@ -4,20 +4,22 @@ pipeline {
         choice(name: 'Environment', choices:['dev','prod'])
     }
     stages {
-        stage('Exporting aws credentials') {
-            steps {
-                echo "Exporting aws credentials"
-                withCredentials([usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'ACCESSKEY', passwordVariable: 'SECRETKEY')]) {
-                    sh "export AWS_ACCESS_KEY_ID=$ACCESSKEY"
-                    sh "export AWS_SECRET_ACCESS_KEY=$SECRETKEY"
-                }
-            }
-        }
+        // stage('Exporting aws credentials') {
+        //     steps {
+        //         echo "Exporting aws credentials"
+        //         withCredentials([usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'ACCESSKEY', passwordVariable: 'SECRETKEY')]) {
+        //             sh "export AWS_ACCESS_KEY_ID=$ACCESSKEY"
+        //             sh "export AWS_SECRET_ACCESS_KEY=$SECRETKEY"
+        //         }
+        //     }
+        // }
  
         stage('Preparing all environments') {
             steps {
                 echo "Preparing all environments"
-                sh ('terraform init')
+                withCredentials([usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'ACCESSKEY', passwordVariable: 'SECRETKEY')]) {
+                    sh ('terraform init')
+                }
                 sh ('terraform workspace new dev')
                 sh ('terraform workspace new prod')
             }
